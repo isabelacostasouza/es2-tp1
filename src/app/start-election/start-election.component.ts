@@ -33,8 +33,14 @@ export class StartElectionComponent implements OnInit {
       setTimeout(() => {
         document.getElementById("invalid-password")?.classList.add("invisible");
         if(!this.action_buttons.includes(changes[1]) && changes[1]) this.current_password += changes[1];
-        else if(changes[1] == this.action_buttons[1]) this.current_password = "";
-        else if(changes[1] == this.action_buttons[2]) this.enterPassword();
+        else switch(changes[1]) {
+          case this.action_buttons[1]:
+            this.current_password = "";
+            break;
+          case this.action_buttons[2]:
+            this.enterPassword();
+            break;
+        }
       }, 5);
     });
   }
