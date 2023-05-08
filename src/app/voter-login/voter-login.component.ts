@@ -43,18 +43,30 @@ export class VoterLoginComponent implements OnInit {
           DocumentEditor.addClassById("invalid-number", "invisible");
           DocumentEditor.addClassById("double-voter", "invisible");
 
-          if(!this.action_buttons.includes(changes[1]) && changes[1] && this.current_number != undefined) this.current_number += changes[1];
-          else if(!this.action_buttons.includes(changes[1]) && changes[1]) this.current_number = changes[1];
-          else if(changes[1] == this.action_buttons[1]) {
-            this.correct_number = false;
-            this.current_number = "";
-            DocumentEditor.addClassById("confirm-number", "invisible");
+          if(!this.action_buttons.includes(changes[1]) && changes[1] && this.current_number != undefined)
+            this.current_number += changes[1];
+          else if(!this.action_buttons.includes(changes[1]) && changes[1])
+            this.current_number = changes[1];
+          else switch(changes[1]) {
+            case this.action_buttons[1]:
+              this.setIncorrectNumber();
+              break;
+            case this.action_buttons[2]:
+              this.enterNumber();
+              break;
+            case this.action_buttons[0]:
+              this.end_voting.emit(true);
+              break;
           }
-          else if(changes[1] == this.action_buttons[2]) this.enterNumber();
-          else if(changes[1] == this.action_buttons[0]) this.end_voting.emit(true);
         }
       }, 5);
     });
+  }
+
+  setIncorrectNumber() {
+    this.correct_number = false;
+    this.current_number = "";
+    DocumentEditor.addClassById("confirm-number", "invisible");
   }
 
   enterNumber() {
