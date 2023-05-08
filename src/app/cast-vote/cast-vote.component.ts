@@ -50,47 +50,57 @@ export class CastVoteComponent implements OnInit {
       setTimeout(() => {
         DocumentEditor.addClassById("invalid-number", "invisible");
 
-        if(!this.action_buttons.includes(changes[1]) && changes[1] && this.senator_voting.length < 3 && this.president_voting.length < 2) {
+        if(this.votingTypeIsValid(changes[1])) {
           this.voting_type = "";
           DocumentEditor.addClassById("bottom-content", "invisible");
 
           if(this.voting_number < 2) {
-            this.senator_voting.push(changes[1]);
-            if(this.senator_voting.length == 3) {
-              if(this.senators[this.senator_voting.join('')] != undefined) {
-                this.setSenatorCandidate();
-              } else {
-                this.voting_type = "null";
-                DocumentEditor.removeClassById("bottom-content", "invisible");
-              }
-            }
+            this.voteOnSenator(changes[1]);
           } else {
-            this.president_voting.push(changes[1]);
-            if(this.president_voting.length == 2) {
-              if(this.presidents[this.president_voting.join('')] != undefined) {
-                this.setPresidentCandidate();
-              } else {
-                this.voting_type = "null";
-                DocumentEditor.removeClassById("bottom-content", "invisible");
-              }
-            }
+            this.voteOnPresident(changes[1]);
           }
         } else if(changes[1] == this.action_buttons[0]) {
           this.senator_voting = [];
           this.president_voting = [];
           this.voting_type = "white";
           DocumentEditor.removeClassById("bottom-content", "invisible");
-        }
-        else if(changes[1] == this.action_buttons[1]) {
+        } else if(changes[1] == this.action_buttons[1]) {
           this.senator_voting.pop();
           this.president_voting.pop();
           this.valid_candidate = false;
           this.voting_type = "";
           DocumentEditor.addClassById("bottom-content", "invisible");
-        }
-        else if(changes[1] == this.action_buttons[2]) this.enterVote();
+        } else if(changes[1] == this.action_buttons[2]) this.enterVote();
       }, 5);
     });
+  }
+
+  votingTypeIsValid(action_performed: any) {
+    return (!this.action_buttons.includes(action_performed) && action_performed && this.senator_voting.length < 3 && this.president_voting.length < 2);
+  }
+
+  voteOnSenator(vote: any) {
+    this.senator_voting.push(vote);
+    if(this.senator_voting.length == 3) {
+      if(this.senators[this.senator_voting.join('')] != undefined) {
+        this.setSenatorCandidate();
+      } else {
+        this.voting_type = "null";
+        DocumentEditor.removeClassById("bottom-content", "invisible");
+      }
+    }
+  }
+
+  voteOnPresident(vote: any) {
+    this.president_voting.push(vote);
+    if(this.president_voting.length == 2) {
+      if(this.presidents[this.president_voting.join('')] != undefined) {
+        this.setPresidentCandidate();
+      } else {
+        this.voting_type = "null";
+        DocumentEditor.removeClassById("bottom-content", "invisible");
+      }
+    }
   }
 
   setSenatorCandidate() {
