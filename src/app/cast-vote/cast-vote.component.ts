@@ -139,6 +139,7 @@ export class CastVoteComponent implements OnInit {
       if(this.voting_type == "normal") {
         if(this.voting_number == 2) this.votes[this.user_logged_in].push(this.president_voting.join(''));
         else this.votes[this.user_logged_in].push(this.senator_voting.join(''));
+        console.log(this.votes);
       }
       else if(this.voting_type == "white") this.votes[this.user_logged_in].push("white");
       else if(this.voting_type == "null") this.votes[this.user_logged_in].push("null");
