@@ -3,8 +3,7 @@
 Nome: Isabela Costa Souza (2020054536)
 
 ## Sobre as tecnologias
-A aplicação feita é um sistema web criado usando Angular e Typescript
-A mesma roda na porta 4200 do localhost da máquina em que é executada
+A aplicação feita é um sistema web criado usando Angular/Typescript e roda na porta 4200 do localhost da máquina em que é executada
 
 Para instalar os pacotes: npm install --save --legacy-peer-deps
 
