@@ -4,10 +4,15 @@ Nome: Isabela Costa Souza (2020054536)
 
 ## Sobre as tecnologias
 A aplicação feita é um sistema web criado usando Angular e Typescript
+A mesma roda na porta 4200 do localhost da máquina em que é executada
 
 Para instalar os pacotes: npm install --save --legacy-peer-deps
 
 Para rodar o código: ng serve
+
+Para rodar os testes unitários: ng test
+
+Para rodar os testes e2e: rode o servidor usando "ng serve" em um terminal e em outro "npx cypress run" para executar os testes
 
 ## Sobre o programa
 
